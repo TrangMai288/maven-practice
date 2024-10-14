@@ -108,7 +108,9 @@ public class ChromeTest {
         DevTools devTool = ((HasDevTools) driver).getDevTools();
 
         devTool.createSession();
-        devTool.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+        devTool.send(Network.enable(Optional.empty(),
+                Optional.empty(),
+                Optional.empty()));
 
         devTool.addListener(Network.requestWillBeSent(), requestSend -> {
             System.out.println("Request URL => " + requestSend.getRequest().getUrl());
