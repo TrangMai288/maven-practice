@@ -46,6 +46,8 @@ public class CheckboxTest {
 
         check(checkbox2);
         Assert.assertTrue(checkbox2.isSelected());
+
+        driver.quit();
     }
 
     public static void check(WebElement checkbox) {
