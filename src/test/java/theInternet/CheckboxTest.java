@@ -50,6 +50,26 @@ public class CheckboxTest {
         driver.quit();
     }
 
+    @Test
+    void checkboxesUpdate1() {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://the-internet.herokuapp.com/checkboxes");
+
+        WebElement checkbox2 = driver.findElement(By.cssSelector("#checkboxes :nth-child(3)"));
+        checkbox2.click();
+        Assert.assertFalse(checkbox2.isSelected());
+    }
+
+    @Test
+    void checkboxesUpdate2() {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://the-internet.herokuapp.com/checkboxes");
+
+        WebElement checkbox2 = driver.findElement(By.cssSelector("#checkboxes input:nth-of-type(2)"));
+        checkbox2.click();
+        Assert.assertFalse(checkbox2.isSelected());
+    }
+
     public static void check(WebElement checkbox) {
         if (!checkbox.isSelected()) {
             checkbox.click();
