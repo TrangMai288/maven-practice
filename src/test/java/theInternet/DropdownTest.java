@@ -61,6 +61,33 @@ public class DropdownTest {
         Assert.assertEquals(dropdown.getOptions().get(1).getText(), "Option 1");
     }
 
+    // multiple select
+    @Test
+    void ableSelectMultipleOptions() {
+        driver.get("https://output.jsbin.com/osebed/2");
+
+        Select selectMultiple = new Select(driver.findElement(By.id("fruits")));
+
+        selectMultiple.selectByVisibleText("Banana");
+        selectMultiple.selectByVisibleText("Apple");
+
+        Assert.assertTrue(selectMultiple.isMultiple());
+        Assert.assertTrue(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='banana']")).isSelected());
+        Assert.assertTrue(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='apple']")).isSelected());
+
+        selectMultiple.deselectByVisibleText("Banana");
+
+        Assert.assertFalse(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='banana']")).isSelected());
+        Assert.assertTrue(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='apple']")).isSelected());
+
+        selectMultiple.deselectAll();
+
+        Assert.assertFalse(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='banana']")).isSelected());
+        Assert.assertFalse(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='apple']")).isSelected());
+        Assert.assertFalse(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='orange']")).isSelected());
+        Assert.assertFalse(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='grape']")).isSelected());
+    }
+
     @AfterMethod
     void quit() {
         driver.quit();

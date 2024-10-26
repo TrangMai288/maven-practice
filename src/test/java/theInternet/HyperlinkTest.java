@@ -57,8 +57,33 @@ public class HyperlinkTest {
         Assert.assertEquals(driver.getCurrentUrl(), "https://the-internet.herokuapp.com/status_codes");
     }
 
+    @Test
+    void hyperlinkUpdate() {
+        driver.navigate().to("https://the-internet.herokuapp.com/status_codes");
+
+        String href200 = driver.findElement(By.linkText("200")).getAttribute("href");
+        driver.findElement(By.xpath("//a[@href='status_codes/200' and contains(.,'200')]")).click();
+        Assert.assertEquals(driver.getCurrentUrl(), href200);
+        driver.navigate().back();
+
+        String href301 = driver.findElement(By.linkText("301")).getAttribute("href");
+        driver.findElement(By.linkText("301")).click();
+        Assert.assertEquals(driver.getCurrentUrl(), href301);
+        driver.navigate().back();
+
+        String href400 = driver.findElement(By.linkText("404")).getAttribute("href");
+        driver.findElement(By.linkText("404")).click();
+        Assert.assertEquals(driver.getCurrentUrl(), href400);
+        driver.navigate().back();
+
+        String href500 = driver.findElement(By.linkText("500")).getAttribute("href");
+        driver.findElement(By.linkText("500")).click();
+        Assert.assertEquals(driver.getCurrentUrl(), href500);
+        driver.navigate().back();
+    }
+
     @AfterMethod
     void quit() {
-        //driver.quit();
+        driver.quit();
     }
 }
