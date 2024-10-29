@@ -1,9 +1,6 @@
 package coding.practice;
 
 public class Bai2 {
-    /**
-     * Lấy 4 ký tự cuối cùng của một chuỗi cho trước
-     */
     public static void main(String[] args) {
         String input = "";
         Bai2.getLast(input);

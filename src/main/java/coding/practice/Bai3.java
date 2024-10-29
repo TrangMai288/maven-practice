@@ -1,9 +1,6 @@
 package coding.practice;
 
 public class Bai3 {
-    /**
-     * Tìm ký tự không lặp lại đầu tiên của một chuỗi
-     */
     public static void main(String[] args) {
         String input = "hello testz";
         char nonRepeatingCharacter;
