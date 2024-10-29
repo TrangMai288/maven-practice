@@ -1,9 +1,6 @@
 package coding.practice;
 
 public class Bai5 {
-    /**
-     * Tìm độ lệch lớn nhất giữa 2 phần tử trong một mảng
-     */
     public static void main(String[] args) {
         int[] arr = {1,2,3,4,5,6,6,2};
         int maximumDifference = printMaximumDifference(arr);

@@ -1,11 +1,8 @@
 package coding.practice;
 
 public class Bai1 {
-    /**
-     * Thay đổi ký tự đặc biệt trong 1 chuỗi cho trước
-     */
     public static void main(String[] args) {
-        String input = "hel#$#l@$@#o t#@$e%&st";
+        String input = "$102.0";
         String output = Bai1.changeSpecialCharacter(input);
         System.out.println("output: " + output);
     }
