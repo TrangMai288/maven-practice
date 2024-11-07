@@ -111,7 +111,7 @@ for (int i = 1; i <= totalRows; i++) {
 
 đối tượng trong đối tượng
 ```java
-driver
+ driver
     .findElements(By.xpath("//table[@id='table1']/tbody/tr"))
     .stream()
     .forEach(row -> {
@@ -119,24 +119,93 @@ driver
         System.out.println(lblName);
     });
 ```
+```java
+List<Person> personList = new ArrayList<>();
 
+driver.findElements(By.xpath("//table[@id='table1']/tbody/tr"))
+        .forEach(cell -> {
+            List<String> cells = cell.findElements(By.tagName("td")).stream().map(WebElement::getText).toList();
+            personList.add(new Person(cells.get(1), cells.get(0), cells.get(3)));
+        });
 
-        List<Person> personList = new ArrayList<>();
+Person minDueValue = personList
+        .stream()
+        .min(Comparator.comparing(Person::getDueValue))
+        .get();
 
-        driver.findElements(By.xpath("//table[@id='table1']/tbody/tr"))
-                .forEach(cell -> {
-                    List<String> cells = cell.findElements(By.tagName("td")).stream().map(WebElement::getText).toList();
-                    personList.add(new Person(cells.get(1), cells.get(0), cells.get(3)));
-                });
+List<String> minDueValuePerson = personList
+        .stream()
+        .filter(person -> person.getDueValue() == minDueValue.getDueValue())
+        .map(Person::getFullName)
+        .toList();
+Assert.assertEquals(minDueValuePerson, List.of("John Smith", "Tim Conway"));
+```
 
-        Person minDueValue = personList
-                .stream()
-                .min(Comparator.comparing(Person::getDueValue))
-                .get();
+### 2. [DateFormat1](src/test/java/theInternet/DateFormat1.java)
+Purpose: convert the String to Date object
+* Define the date format
+```java
+SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+```
+* Create a date string
+```java
+String dateString = "01/11/2024";
+```
+* Parse a date string into a Date object
+```java
+Date dateParsed = dateFormat.parse(dateString);
+System.out.println(dateParsed);
+```
+* Format the Date object back to a string
+```java
+String formattedDate = dateFormat.format(dateParsed);
+System.out.println(formattedDate);
+```
 
-        List<String> minDueValuePerson = personList
-                .stream()
-                .filter(person -> person.getDueValue() == minDueValue.getDueValue())
-                .map(Person::getFullName)
-                .toList();
-        Assert.assertEquals(minDueValuePerson, List.of("John Smith", "Tim Conway"));
+### 3. [DateFormat2](src/test/java/theInternet/DateFormat2.java)
+Purpose: get the day of the month
+* Define the date format
+```java
+SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+```
+* Create a date string
+```java
+String dateString = "01/11/2024";
+```
+* Parse a date string into a Date object
+```java
+Date dateParsed = dateFormat.parse(dateString);
+```
+* Create a Calendar object and set the time
+```java
+Calendar calendar = Calendar.getInstance();
+calendar.setTime(dateParsed);
+```
+* Get the day of the month
+```java
+int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+```
+
+### 4. [DateFormat2](src/test/java/theInternet/DateFormat2.java)
+Purpose: get the day of the month
+* Define the date format
+```java
+SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+```
+* Create a date string
+```java
+String dateString = "01/11/2024";
+```
+* Parse a date string into a Date object
+```java
+Date dateParsed = dateFormat.parse(dateString);
+```
+* Create a Calendar object and set the time
+```java
+Calendar calendar = Calendar.getInstance();
+calendar.setTime(dateParsed);
+```
+* Get the day of the month
+```java
+int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+```
