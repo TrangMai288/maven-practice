@@ -1,7 +1,7 @@
 <suite name="WebTable">
     <test name="Chrome Browser">
         <classes>
-            <class name="theInternet.HoverTest"/>
+            <class name="theInternet.FormAuthenticationTest"/>
         </classes>
     </test>
 </suite>
